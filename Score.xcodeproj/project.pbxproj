@@ -12,6 +12,7 @@
 		C171D2391FFC90750047EE57 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C171D2371FFC90750047EE57 /* Main.storyboard */; };
 		C171D23B1FFC90750047EE57 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C171D23A1FFC90750047EE57 /* Assets.xcassets */; };
 		C171D23E1FFC90750047EE57 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C171D23C1FFC90750047EE57 /* LaunchScreen.storyboard */; };
+		C171D2461FFC91D40047EE57 /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C171D2451FFC91D40047EE57 /* MainTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		C171D23A1FFC90750047EE57 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C171D23D1FFC90750047EE57 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C171D23F1FFC90750047EE57 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C171D2451FFC91D40047EE57 /* MainTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainTableViewController.swift; path = ../MainTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 			children = (
 				C171D2331FFC90750047EE57 /* AppDelegate.swift */,
 				C171D2351FFC90750047EE57 /* ViewController.swift */,
+				C171D2451FFC91D40047EE57 /* MainTableViewController.swift */,
 				C171D2371FFC90750047EE57 /* Main.storyboard */,
 				C171D23A1FFC90750047EE57 /* Assets.xcassets */,
 				C171D23C1FFC90750047EE57 /* LaunchScreen.storyboard */,
@@ -138,6 +141,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C171D2361FFC90750047EE57 /* ViewController.swift in Sources */,
+				C171D2461FFC91D40047EE57 /* MainTableViewController.swift in Sources */,
 				C171D2341FFC90750047EE57 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
