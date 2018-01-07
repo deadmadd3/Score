@@ -10,7 +10,23 @@ import UIKit
 
 class MainTableViewController: UITableViewController {
 
-    let playerList: [Player] = []
+    var playerList: [Player] = []
+    
+    @IBAction func btnUpdate(_ sender: Any) {
+        
+        let person = Player()
+        person.name = "My Name Here"
+        person.score = 0
+        let newRowIndex = playerList.count
+        
+        playerList.append(person)
+        
+        let indexPath = IndexPath(row: newRowIndex, section: 0)
+        let indexpaths = [indexPath]
+        tableView.insertRows(at: indexpaths, with: .automatic)
+    
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,24 +47,35 @@ class MainTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return playerList.count
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "player", for: indexPath)
 
-        // Configure the cell...
-
+        let person = playerList[indexPath.row]
+        configureText(for: cell, with: person)
+        configureScore(for: cell, with: person)
+        
         return cell
     }
  
-
+    func configureText(for cell: UITableViewCell, with item: Player){
+        let label = cell.viewWithTag(1000) as! UILabel
+        label.text = item.name
+    }
+    
+    func configureScore(for cell: UITableViewCell, with item: Player){
+        let score = cell.viewWithTag(1001) as! UILabel
+        score.text = "\(item.score)"
+    }
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
