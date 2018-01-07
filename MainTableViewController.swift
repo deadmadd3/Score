@@ -11,14 +11,20 @@ import UIKit
 class MainTableViewController: UITableViewController {
 
     var playerList: [Player] = []
+    var nameTextField: UITextField?
     
     @IBAction func btnUpdate(_ sender: Any) {
-        
-        let person = Player()
-        person.name = "My Name Here"
-        person.score = 0
         let newRowIndex = playerList.count
+        let person = Player()
         
+        let alertController = UIAlertController(title: "Add Player", message: nil, preferredStyle: .alert)
+        let alertAction = UIAlertAction(title: "Done", style: .default, handler: nil)
+        alertController.addTextField(configurationHandler: nameTextField)
+        alertController.addAction(alertAction)
+        present(alertController, animated: true, completion: nil)
+        let named = nameTextField?.text
+        person.name = named!
+        person.score = 0
         playerList.append(person)
         
         let indexPath = IndexPath(row: newRowIndex, section: 0)
@@ -27,23 +33,19 @@ class MainTableViewController: UITableViewController {
     
     }
     
+    func nameTextField(textField: UITextField!){
+        nameTextField = textField
+        nameTextField?.placeholder = "Enter name"
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-    // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
@@ -100,24 +102,6 @@ class MainTableViewController: UITableViewController {
     // Override to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
 
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
     }
     */
 
