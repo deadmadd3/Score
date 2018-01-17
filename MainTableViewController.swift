@@ -11,33 +11,45 @@ import UIKit
 class MainTableViewController: UITableViewController {
 
     var playerList: [Player] = []
-    var nameTextField: UITextField?
     
     @IBAction func btnUpdate(_ sender: Any) {
+
+        let alertController = UIAlertController(title: "Add Player", message: nil, preferredStyle: .alert)
+        let alertText = UIAlertAction(title: "Done", style: .default) { (alertAction) in
+            let nameTextField = alertController.textFields![0] as UITextField
+            self.addPlayer(new_name: nameTextField.text!)
+            
+        }
+        
+        alertController.addTextField{ (nameTextField) in
+            nameTextField.placeholder = "Enter Name"
+        }
+        alertController.addAction(alertText)
+        
+        present(alertController, animated: true, completion: nil)
+        
+        
+    }
+    
+    func addPlayer(new_name: String) {
         let newRowIndex = playerList.count
         let person = Player()
         
-        let alertController = UIAlertController(title: "Add Player", message: nil, preferredStyle: .alert)
-        let alertAction = UIAlertAction(title: "Done", style: .default, handler: nil)
-        alertController.addTextField(configurationHandler: nameTextField)
-        alertController.addAction(alertAction)
-        present(alertController, animated: true, completion: nil)
-        let named = nameTextField?.text
-        person.name = named!
+        person.name = new_name
         person.score = 0
         playerList.append(person)
         
         let indexPath = IndexPath(row: newRowIndex, section: 0)
         let indexpaths = [indexPath]
         tableView.insertRows(at: indexpaths, with: .automatic)
-    
     }
     
-    func nameTextField(textField: UITextField!){
+    /*func nameTextField(textField: UITextField!) {
         nameTextField = textField
         nameTextField?.placeholder = "Enter name"
+        
     }
-    
+    */
     override func viewDidLoad() {
         super.viewDidLoad()
     }
