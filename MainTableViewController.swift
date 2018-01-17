@@ -18,14 +18,12 @@ class MainTableViewController: UITableViewController {
         let alertText = UIAlertAction(title: "Done", style: .default) { (alertAction) in
             let nameTextField = alertController.textFields![0] as UITextField
             self.addPlayer(new_name: nameTextField.text!)
-            
         }
         
         alertController.addTextField{ (nameTextField) in
             nameTextField.placeholder = "Enter Name"
         }
         alertController.addAction(alertText)
-        
         present(alertController, animated: true, completion: nil)
         
         
@@ -44,12 +42,6 @@ class MainTableViewController: UITableViewController {
         tableView.insertRows(at: indexpaths, with: .automatic)
     }
     
-    /*func nameTextField(textField: UITextField!) {
-        nameTextField = textField
-        nameTextField?.placeholder = "Enter name"
-        
-    }
-    */
     override func viewDidLoad() {
         super.viewDidLoad()
     }
