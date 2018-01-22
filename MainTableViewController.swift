@@ -43,18 +43,16 @@ class MainTableViewController: UITableViewController {
     @IBAction func btnAdd(_ sender: AnyObject) {
         let buttonPosition = sender.convert(CGPoint.zero, to: self.tableView)
         let indexPathzz = self.tableView.indexPathForRow(at: buttonPosition)
-        print(indexPathzz!)
-        /*let index = sender.tag
-        playerList[index!].score = playerList[index!].score + 1
+        playerList[indexPathzz![1]].score = playerList[indexPathzz![1]].score + 1
         tableView.reloadData()
-         */
+        
     }
     
     @IBAction func btnSubtract(_ sender: AnyObject) {
-        /*let index = sender.tag
-        playerList[index!].score = playerList[index!].score - 1
+        let buttonPosition = sender.convert(CGPoint.zero, to: self.tableView)
+        let indexPathzz = self.tableView.indexPathForRow(at: buttonPosition)
+        playerList[indexPathzz![1]].score = playerList[indexPathzz![1]].score - 1
         tableView.reloadData()
-        */
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
