@@ -41,11 +41,19 @@ class MainTableViewController: UITableViewController {
     }
     
     @IBAction func btnAdd(_ sender: AnyObject) {
+        let addThis = editScore(sender)
         let buttonPosition = sender.convert(CGPoint.zero, to: self.tableView)
         let indexPathzz = self.tableView.indexPathForRow(at: buttonPosition)
-        playerList[indexPathzz![1]].score = playerList[indexPathzz![1]].score + 1
+        playerList[indexPathzz![1]].score = playerList[indexPathzz![1]].score + addThis
         tableView.reloadData()
         
+        /*
+        print(" it is \(editBy)")
+        let buttonPosition = sender.convert(CGPoint.zero, to: self.tableView)
+        let indexPathzz = self.tableView.indexPathForRow(at: buttonPosition)
+        playerList[indexPathzz![1]].score = playerList[indexPathzz![1]].score + editBy
+        print(" it is \(editBy)")
+        */
     }
     
     @IBAction func btnSubtract(_ sender: AnyObject) {
@@ -53,6 +61,22 @@ class MainTableViewController: UITableViewController {
         let indexPathzz = self.tableView.indexPathForRow(at: buttonPosition)
         playerList[indexPathzz![1]].score = playerList[indexPathzz![1]].score - 1
         tableView.reloadData()
+    }
+    
+    func editScore(_ sender: AnyObject) -> Int {
+        var editBy = 0
+        let alertController = UIAlertController(title: "Enter Number", message: nil, preferredStyle: .alert)
+        alertController.addTextField{ (nameTextField) in
+            nameTextField.placeholder = "Number"
+            nameTextField.keyboardType = .numberPad
+        }
+        let alertText = UIAlertAction(title: "Done", style: .default) { (alertAction) in
+            let scoreTextField = alertController.textFields![0] as UITextField
+            editBy = Int(scoreTextField.text!)!
+        }
+        alertController.addAction(alertText)
+        present(alertController, animated: true, completion: nil)
+        return editBy
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
