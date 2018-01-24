@@ -11,7 +11,7 @@ import UIKit
 class MainTableViewController: UITableViewController {
 
     var playerList: [Player] = []
- 
+    
     @IBAction func btnUpdate(_ sender: Any) {
 
         let alertController = UIAlertController(title: "Add Player", message: nil, preferredStyle: .alert)
@@ -41,20 +41,25 @@ class MainTableViewController: UITableViewController {
     }
     
     @IBAction func btnAdd(_ sender: AnyObject) {
-        let addThis = editScore(sender)
         let buttonPosition = sender.convert(CGPoint.zero, to: self.tableView)
         let indexPathzz = self.tableView.indexPathForRow(at: buttonPosition)
         
-        playerList[indexPathzz![1]].score = playerList[indexPathzz![1]].score + addThis
-        tableView.reloadData()
+        let alertController = UIAlertController(title: "Enter Number", message: nil, preferredStyle: .alert)
+        let alertText = UIAlertAction(title: "Done", style: .default) { (alertAction) in
+            let scoreTextField = alertController.textFields![0] as UITextField
+            self.editScore(scoreTextField.text!, indexPathzz![1])
+        }
         
-        /*
-        print(" it is \(editBy)")
-        let buttonPosition = sender.convert(CGPoint.zero, to: self.tableView)
-        let indexPathzz = self.tableView.indexPathForRow(at: buttonPosition)
-        playerList[indexPathzz![1]].score = playerList[indexPathzz![1]].score + editBy
-        print(" it is \(editBy)")
-        */
+        alertController.addTextField{ (nameTextField) in
+            nameTextField.placeholder = "Number"
+        }
+        alertController.addAction(alertText)
+        present(alertController, animated: true, completion: nil)
+        
+        
+        //playerList[indexPathzz![1]].score = playerList[indexPathzz![1]].score + editBy
+        //tableView.reloadData()
+
     }
     
     @IBAction func btnSubtract(_ sender: AnyObject) {
@@ -64,11 +69,11 @@ class MainTableViewController: UITableViewController {
         tableView.reloadData()
     }
     
-    func editScore(_ sender: AnyObject) -> Int {
-        var num: Int = 0
-        
-        
-        return num
+    func editScore(_ num: String, _ index: Int) {
+        let addThis = Int(num)!
+        playerList[index].score = playerList[index].score + addThis
+        tableView.reloadData()
+
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
