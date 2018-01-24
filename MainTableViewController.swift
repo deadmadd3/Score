@@ -44,6 +44,7 @@ class MainTableViewController: UITableViewController {
         let addThis = editScore(sender)
         let buttonPosition = sender.convert(CGPoint.zero, to: self.tableView)
         let indexPathzz = self.tableView.indexPathForRow(at: buttonPosition)
+        
         playerList[indexPathzz![1]].score = playerList[indexPathzz![1]].score + addThis
         tableView.reloadData()
         
@@ -64,19 +65,10 @@ class MainTableViewController: UITableViewController {
     }
     
     func editScore(_ sender: AnyObject) -> Int {
-        var editBy = 0
-        let alertController = UIAlertController(title: "Enter Number", message: nil, preferredStyle: .alert)
-        alertController.addTextField{ (nameTextField) in
-            nameTextField.placeholder = "Number"
-            nameTextField.keyboardType = .numberPad
-        }
-        let alertText = UIAlertAction(title: "Done", style: .default) { (alertAction) in
-            let scoreTextField = alertController.textFields![0] as UITextField
-            editBy = Int(scoreTextField.text!)!
-        }
-        alertController.addAction(alertText)
-        present(alertController, animated: true, completion: nil)
-        return editBy
+        var num: Int = 0
+        
+        
+        return num
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -102,8 +94,6 @@ class MainTableViewController: UITableViewController {
         if editingStyle == .delete {
             playerList.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Not used in our example, but if you were adding a new row, this is where you would do it.
         }
     }
     override func viewDidLoad() {
