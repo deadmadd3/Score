@@ -82,6 +82,22 @@ class MainTableViewController: UITableViewController {
 
     }
     
+    @IBAction func btnReorder(_ sender: Any) {
+        // Insertion Sort
+        var key, j : Int
+            for i in 1 ..< playerList.count {
+                key = self.playerList[i].score;
+                j = i-1;
+
+                while j >= 0 && self.playerList[j].score > key {
+                    self.playerList[j+1].score = self.playerList[j].score;
+                    j = j-1;
+                }
+                self.playerList[j+1].score = key;
+            }
+        tableView.reloadData()
+    }
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "player", for: indexPath)
         let person = playerList[indexPath.row]
