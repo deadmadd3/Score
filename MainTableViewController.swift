@@ -55,18 +55,24 @@ class MainTableViewController: UITableViewController {
         }
         alertController.addAction(alertText)
         present(alertController, animated: true, completion: nil)
-        
-        
-        //playerList[indexPathzz![1]].score = playerList[indexPathzz![1]].score + editBy
-        //tableView.reloadData()
 
     }
     
     @IBAction func btnSubtract(_ sender: AnyObject) {
         let buttonPosition = sender.convert(CGPoint.zero, to: self.tableView)
         let indexPathzz = self.tableView.indexPathForRow(at: buttonPosition)
-        playerList[indexPathzz![1]].score = playerList[indexPathzz![1]].score - 1
-        tableView.reloadData()
+        
+        let alertController = UIAlertController(title: "Enter Number", message: nil, preferredStyle: .alert)
+        let alertText = UIAlertAction(title: "Done", style: .default) { (alertAction) in
+            let scoreTextField = alertController.textFields![0] as UITextField
+            self.editScore("-" + scoreTextField.text!, indexPathzz![1])
+        }
+        
+        alertController.addTextField{ (nameTextField) in
+            nameTextField.placeholder = "Number"
+        }
+        alertController.addAction(alertText)
+        present(alertController, animated: true, completion: nil)
     }
     
     func editScore(_ num: String, _ index: Int) {
