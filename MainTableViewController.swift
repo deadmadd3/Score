@@ -21,6 +21,7 @@ class MainTableViewController: UITableViewController {
         }
         
         alertController.addTextField{ (nameTextField) in
+            nameTextField.autocapitalizationType = .words
             nameTextField.placeholder = "Enter Name"
         }
         alertController.addAction(alertText)
@@ -50,8 +51,9 @@ class MainTableViewController: UITableViewController {
             self.editScore(scoreTextField.text!, indexPathzz![1])
         }
         
-        alertController.addTextField{ (nameTextField) in
-            nameTextField.placeholder = "Number"
+        alertController.addTextField{ (scoreTextField) in
+            scoreTextField.keyboardType = .phonePad
+            scoreTextField.placeholder = "Number"
         }
         alertController.addAction(alertText)
         present(alertController, animated: true, completion: nil)
@@ -68,8 +70,10 @@ class MainTableViewController: UITableViewController {
             self.editScore("-" + scoreTextField.text!, indexPathzz![1])
         }
         
-        alertController.addTextField{ (nameTextField) in
-            nameTextField.placeholder = "Number"
+        alertController.addTextField{ (scoreTextField) in
+            scoreTextField.keyboardType = .phonePad
+            scoreTextField.placeholder = "Number"
+            
         }
         alertController.addAction(alertText)
         present(alertController, animated: true, completion: nil)
