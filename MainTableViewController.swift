@@ -88,18 +88,19 @@ class MainTableViewController: UITableViewController {
     
     @IBAction func btnReorder(_ sender: Any) {
         // Bubble Sort
-        let n = playerList.count
-        for i in 0 ...n {
-            for j in 0...(n-i-1) {
+        let n = playerList.count-1
+        for i in 0...n {
+            let k = n-i-1
+            for j in 0..<k {
                 if (playerList[j].score > playerList[j+1].score) {
-                    swap(playerList[j], playerList[j+1])
+                    swap(&playerList[j], &playerList[j+1])
                 }
             }
         }
     }
     
-    func swap(_ x: Player, _ y: Player) {
-        var temp: Player = x;
+    func swap(_ x: inout Player, _ y: inout Player) {
+        let temp: Player = x;
         x = y;
         y = temp;
         tableView.reloadData()
