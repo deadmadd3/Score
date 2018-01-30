@@ -88,23 +88,24 @@ class MainTableViewController: UITableViewController {
     
     @IBAction func btnReorder(_ sender: Any) {
         
-        let new = playerList.sort
-        /* Bubble Sort
-        let n = playerList.count-1
-        for i in 0...n {
-            let k = n-i-1
-            for j in 0..<k {
-                if (playerList[j].score > playerList[j+1].score) {
-                    swap(&playerList[j], &playerList[j+1])
-                }
-            }
+        let actionController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let ascendingText = UIAlertAction(title: "Ascending Order", style: .default) { _ in
+            self.playerList.sort{$0.score > $1.score}
+            self.tableView.reloadData()
         }
-         */
+        let descendingText = UIAlertAction(title: "Descending Order", style: .default) { _ in
+            self.playerList.sort{$0.score < $1.score}
+            self.tableView.reloadData()
+        }
+        let cancelText = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        actionController.addAction(ascendingText)
+        actionController.addAction(descendingText)
+        actionController.addAction(cancelText)
+        present(actionController, animated: true, completion: nil)
+
+
     }
     
-    func swap(_ x: Int, _ y: Int) {
-        playerList.swapAt(x, y)
-    }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "player", for: indexPath)
         let person = playerList[indexPath.row]
