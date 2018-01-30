@@ -87,7 +87,9 @@ class MainTableViewController: UITableViewController {
     }
     
     @IBAction func btnReorder(_ sender: Any) {
-        // Bubble Sort
+        
+        let new = playerList.sort
+        /* Bubble Sort
         let n = playerList.count-1
         for i in 0...n {
             let k = n-i-1
@@ -97,13 +99,11 @@ class MainTableViewController: UITableViewController {
                 }
             }
         }
+         */
     }
     
-    func swap(_ x: inout Player, _ y: inout Player) {
-        let temp: Player = x;
-        x = y;
-        y = temp;
-        tableView.reloadData()
+    func swap(_ x: Int, _ y: Int) {
+        playerList.swapAt(x, y)
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "player", for: indexPath)
