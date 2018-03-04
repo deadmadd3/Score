@@ -12,6 +12,7 @@ class MainTableViewController: UITableViewController {
 
     var playerList: [Player] = []
     
+    // Add Player
     @IBAction func btnUpdate(_ sender: Any) {
 
         let alertController = UIAlertController(title: "Add Player", message: nil, preferredStyle: .alert)
@@ -52,7 +53,7 @@ class MainTableViewController: UITableViewController {
         }
         
         alertController.addTextField{ (scoreTextField) in
-            scoreTextField.keyboardType = .phonePad
+            scoreTextField.keyboardType = .numberPad
             scoreTextField.placeholder = "Number"
         }
         alertController.addAction(alertText)
@@ -71,7 +72,7 @@ class MainTableViewController: UITableViewController {
         }
         
         alertController.addTextField{ (scoreTextField) in
-            scoreTextField.keyboardType = .phonePad
+            scoreTextField.keyboardType = .numberPad
             scoreTextField.placeholder = "Number"
             
         }
@@ -80,7 +81,11 @@ class MainTableViewController: UITableViewController {
     }
     
     func editScore(_ num: String, _ index: Int) {
-        let addThis = Int(num)!
+        
+        guard let addThis = Int(num) else {
+            let addThis = 0
+            return
+        }
         playerList[index].score = playerList[index].score + addThis
         tableView.reloadData()
 
