@@ -154,8 +154,4 @@ class MainTableViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of rows
         return playerList.count
     }
-
-    
-
-
 }
