@@ -114,6 +114,7 @@ class MainTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "player", for: indexPath)
         let person = playerList[indexPath.row]
+        tableView.separatorColor = UIColor.init(red: 23, green: 130, blue: 146, alpha: 0)
         configureText(for: cell, with: person)
         configureScore(for: cell, with: person)
         return cell
@@ -152,6 +153,7 @@ class MainTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
+        tableView.separatorColor = UIColor.init(red: 23, green: 130, blue: 146, alpha: 0)
         return playerList.count
     }
 }
