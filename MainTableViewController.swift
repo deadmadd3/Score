@@ -35,7 +35,11 @@ class MainTableViewController: UITableViewController {
         
         person.name = new_name
         person.score = 0
-        playerList.append(person)
+        if person.name == "" {
+            return 
+        }else{
+            playerList.append(person)
+        }
         
         let indexPath = IndexPath(row: newRowIndex, section: 0)
         let indexpaths = [indexPath]
