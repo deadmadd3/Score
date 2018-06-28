@@ -97,7 +97,9 @@ class MainTableViewController: UITableViewController {
     
     @IBAction func btnReorder(_ sender: Any) {
         
-        let actionController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
         let ascendingText = UIAlertAction(title: "Ascending Order", style: .default) { _ in
             self.playerList.sort{$0.score > $1.score}
             self.tableView.reloadData()
@@ -107,29 +109,33 @@ class MainTableViewController: UITableViewController {
             self.tableView.reloadData()
         }
         let cancelText = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        actionController.addAction(ascendingText)
-        actionController.addAction(descendingText)
-        actionController.addAction(cancelText)
-        present(actionController, animated: true, completion: nil)
-
-
+        
+        alertController.addAction(cancelText)
+        alertController.addAction(ascendingText)
+        alertController.addAction(descendingText)
+        
+        if let popoverController = alertController.popoverPresentationController {
+            popoverController.barButtonItem = sender as? UIBarButtonItem
+        }
+        
+        present(alertController, animated: true, completion: nil)
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "player", for: indexPath)
         let person = playerList[indexPath.row]
-        tableView.separatorColor = UIColor.init(red: 23, green: 130, blue: 146, alpha: 0)
+        tableView.separatorColor = UIColor.init(red: 0.09, green: 0.51, blue: 0.57, alpha: 0)
         configureText(for: cell, with: person)
         configureScore(for: cell, with: person)
         return cell
     }
     
-    func configureText(for cell: UITableViewCell, with item: Player){
+    func configureText(for cell: UITableViewCell, with item: Player) {
         let label = cell.viewWithTag(1000) as! UILabel
         label.text = item.name
     }
     
-    func configureScore(for cell: UITableViewCell, with item: Player){
+    func configureScore(for cell: UITableViewCell, with item: Player) {
         let score = cell.viewWithTag(1001) as! UILabel
         score.text = "\(item.score)"
     }
@@ -141,23 +147,30 @@ class MainTableViewController: UITableViewController {
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
+    
+    // Table View
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        tableView.separatorColor = UIColor.init(red: 0.09, green: 0.51, blue: 0.57, alpha: 0)
+        return playerList.count
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
     }
 
+    // Delay Launch
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        Thread.sleep(forTimeInterval: 5.0)
+        return true
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
-    }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        tableView.separatorColor = UIColor.init(red: 23, green: 130, blue: 146, alpha: 0)
-        return playerList.count
-    }
 }
