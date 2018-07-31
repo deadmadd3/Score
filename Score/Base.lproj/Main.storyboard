@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Z0b-z8-OZp">
-    <device id="ipad9_7" orientation="portrait">
+    <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -15,19 +15,19 @@
             <objects>
                 <tableViewController id="Y76-I0-mXj" customClass="MainTableViewController" customModule="Score" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" tag="1000" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="66" sectionHeaderHeight="28" sectionFooterHeight="28" id="uAj-EG-vY0">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.091092266142368317" green="0.50954777002334595" blue="0.57305693626403809" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="player" rowHeight="66" id="xgD-Nc-VL9">
-                                <rect key="frame" x="0.0" y="28" width="768" height="66"/>
+                                <rect key="frame" x="0.0" y="28" width="375" height="66"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xgD-Nc-VL9" id="t8V-nl-O3t">
-                                    <rect key="frame" x="0.0" y="0.0" width="768" height="65.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="65.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="1000" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nW0-9V-QCf">
-                                            <rect key="frame" x="23" y="18" width="57.5" height="30"/>
+                                            <rect key="frame" x="19" y="18" width="57.5" height="30"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="30" id="AKY-bc-hTg"/>
                                             </constraints>
@@ -36,7 +36,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="1001" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0000 " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="naB-G2-Udl">
-                                            <rect key="frame" x="650" y="18" width="57" height="30"/>
+                                            <rect key="frame" x="261" y="18" width="57" height="30"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="30" id="VQ1-Ll-9tU"/>
                                             </constraints>
@@ -45,7 +45,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VUU-xJ-aTo" userLabel="Add">
-                                            <rect key="frame" x="1069" y="18" width="30" height="30"/>
+                                            <rect key="frame" x="326" y="18" width="30" height="30"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="30" id="6bR-IU-8xs"/>
                                                 <constraint firstAttribute="height" constant="30" id="Czc-8V-p7p"/>
@@ -59,7 +59,7 @@
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VlY-ob-ar9">
-                                            <rect key="frame" x="612" y="18" width="30" height="30"/>
+                                            <rect key="frame" x="223" y="18" width="30" height="30"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="30" id="Xyn-R3-HzH"/>
                                                 <constraint firstAttribute="width" constant="30" id="bjt-lu-Rsg"/>
@@ -101,6 +101,11 @@
                             <outlet property="delegate" destination="Y76-I0-mXj" id="vnq-7Y-zMN"/>
                         </connections>
                     </tableView>
+                    <toolbarItems>
+                        <barButtonItem systemItem="save" id="ZDP-S6-Lbg"/>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="t91-EX-Nt2"/>
+                        <barButtonItem systemItem="action" id="Keq-Yc-kzH"/>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" title="Score!" id="57q-Aa-Vgd">
                         <barButtonItem key="leftBarButtonItem" title="Reorder" id="aPr-vE-1JD">
                             <connections>
@@ -109,10 +114,11 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Add Player" id="kwn-cK-8iq">
                             <connections>
-                                <action selector="btnUpdate:" destination="Y76-I0-mXj" id="5TG-Cc-8KX"/>
+                                <action selector="btnNewPlayer:" destination="Y76-I0-mXj" id="Q4k-ko-Lg8"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gyh-7j-KGW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -121,11 +127,15 @@
         <!--Navigation Controller-->
         <scene sceneID="CUG-gu-oww">
             <objects>
-                <navigationController id="Z0b-z8-OZp" sceneMemberID="viewController">
+                <navigationController toolbarHidden="NO" id="Z0b-z8-OZp" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="yy1-tM-zAq">
-                        <rect key="frame" x="0.0" y="20" width="768" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="6Nq-WL-8B5">
+                        <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="Y76-I0-mXj" kind="relationship" relationship="rootViewController" id="TG5-T5-dVE"/>
                     </connections>

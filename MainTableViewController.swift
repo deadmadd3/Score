@@ -10,11 +10,13 @@ import UIKit
 
 class MainTableViewController: UITableViewController {
 
-    var playerList: [Player] = []
     
-    // Add Player
-    @IBAction func btnUpdate(_ sender: Any) {
+    //----------------------------------------------- Navigation Bar Functions -----------------------------------------------//
+    
+    var playerList: [Player] = []
 
+    // Add Player
+    @IBAction func btnNewPlayer(_ sender: Any) {
         let alertController = UIAlertController(title: "Add Player", message: nil, preferredStyle: .alert)
         let alertText = UIAlertAction(title: "Done", style: .default) { (alertAction) in
             let nameTextField = alertController.textFields![0] as UITextField
@@ -29,22 +31,36 @@ class MainTableViewController: UITableViewController {
         present(alertController, animated: true, completion: nil)
     }
     
-    func addPlayer(new_name: String) {
-        let newRowIndex = playerList.count
-        let person = Player()
+    @IBAction func btnReorder(_ sender: Any) {
         
-        person.name = new_name
-        person.score = 0
-        if person.name == "" {
-            return 
-        }else{
-            playerList.append(person)
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let ascendingText = UIAlertAction(title: "Ascending Order", style: .default) { _ in
+            self.playerList.sort{$0.score > $1.score}
+            self.tableView.reloadData()
+        }
+        let descendingText = UIAlertAction(title: "Descending Order", style: .default) { _ in
+            self.playerList.sort{$0.score < $1.score}
+            self.tableView.reloadData()
+        }
+        let cancelText = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        alertController.addAction(cancelText)
+        alertController.addAction(ascendingText)
+        alertController.addAction(descendingText)
+        
+        if let popoverController = alertController.popoverPresentationController {
+            popoverController.barButtonItem = sender as? UIBarButtonItem
         }
         
-        let indexPath = IndexPath(row: newRowIndex, section: 0)
-        let indexpaths = [indexPath]
-        tableView.insertRows(at: indexpaths, with: .automatic)
+        present(alertController, animated: true, completion: nil)
     }
+    
+    
+    
+    
+    
+    //----------------------------------------------- Edit Score -----------------------------------------------//
     
     @IBAction func btnAdd(_ sender: AnyObject) {
         let buttonPosition = sender.convert(CGPoint.zero, to: self.tableView)
@@ -95,33 +111,21 @@ class MainTableViewController: UITableViewController {
 
     }
     
-    @IBAction func btnReorder(_ sender: Any) {
+
+    
+    
+
+    
+    
+    //----------------------------------------------- Table View -----------------------------------------------//
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
         
-        
-        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        
-        let ascendingText = UIAlertAction(title: "Ascending Order", style: .default) { _ in
-            self.playerList.sort{$0.score > $1.score}
-            self.tableView.reloadData()
-        }
-        let descendingText = UIAlertAction(title: "Descending Order", style: .default) { _ in
-            self.playerList.sort{$0.score < $1.score}
-            self.tableView.reloadData()
-        }
-        let cancelText = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        
-        alertController.addAction(cancelText)
-        alertController.addAction(ascendingText)
-        alertController.addAction(descendingText)
-        
-        if let popoverController = alertController.popoverPresentationController {
-            popoverController.barButtonItem = sender as? UIBarButtonItem
-        }
-        
-        present(alertController, animated: true, completion: nil)
+        return 1
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "player", for: indexPath)
         let person = playerList[indexPath.row]
         tableView.separatorColor = UIColor.init(red: 0.09, green: 0.51, blue: 0.57, alpha: 0)
@@ -130,14 +134,10 @@ class MainTableViewController: UITableViewController {
         return cell
     }
     
-    func configureText(for cell: UITableViewCell, with item: Player) {
-        let label = cell.viewWithTag(1000) as! UILabel
-        label.text = item.name
-    }
-    
-    func configureScore(for cell: UITableViewCell, with item: Player) {
-        let score = cell.viewWithTag(1001) as! UILabel
-        score.text = "\(item.score)"
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        tableView.separatorColor = UIColor.init(red: 0.09, green: 0.51, blue: 0.57, alpha: 0)
+        return playerList.count
     }
     
     // Delete Player
@@ -148,26 +148,57 @@ class MainTableViewController: UITableViewController {
         }
     }
     
-    // Table View
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+
+    
+    
+    //----------------------------------------------- Auxilliary Functions -----------------------------------------------//
+    
+    func addPlayer(new_name: String) {
+        let newRowIndex = playerList.count
+        let person = Player()
+        
+        person.name = new_name
+        person.score = 0
+        if person.name == "" {
+            return
+        }else{
+            playerList.append(person)
+        }
+        
+        let indexPath = IndexPath(row: newRowIndex, section: 0)
+        let indexpaths = [indexPath]
+        tableView.insertRows(at: indexpaths, with: .automatic)
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        tableView.separatorColor = UIColor.init(red: 0.09, green: 0.51, blue: 0.57, alpha: 0)
-        return playerList.count
+    func configureText(for cell: UITableViewCell, with item: Player) {
+        
+        let label = cell.viewWithTag(1000) as! UILabel
+        label.text = item.name
     }
+    
+    func configureScore(for cell: UITableViewCell, with item: Player) {
+        
+        let score = cell.viewWithTag(1001) as! UILabel
+        score.text = "\(item.score)"
+    }
+    
+    
+    
+    //----------------------------------------------- Application Life Cycle -----------------------------------------------//
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-
-    // Delay Launch
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
         Thread.sleep(forTimeInterval: 5.0)
         return true
     }
     
     override func didReceiveMemoryWarning() {
+        
         super.didReceiveMemoryWarning()
     }
 
