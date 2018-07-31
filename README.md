@@ -1,5 +1,5 @@
 # Score
-Score-keeping iPhone app that can be used to keep score in Scrabble, poker, or card games
+Score-keeping iPhone app that can be used to keep score in Scrabble, poker, card games, or games that keep a numerical scorecard.
 
 ## App Features
 Simple interface makes it easy to add players, add and subtract from their score, and reorder 
