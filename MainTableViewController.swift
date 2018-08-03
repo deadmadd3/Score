@@ -56,9 +56,63 @@ class MainTableViewController: UITableViewController {
         present(alertController, animated: true, completion: nil)
     }
     
+    //----------------------------------------------- ToolBar Functions -----------------------------------------------//
     
+    @IBAction func btnSave(_ sender: Any) {
+        let listOfScores: [Player] = []
+        
+        let app: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+        let scorecard = app.scorecard as! Scorecard
+        
+        // Creating the save file alert
+        let saveCard = UIAlertController(title: "Save Scorecard", message: "Please enter the file name:", preferredStyle: UIAlertControllerStyle.alert)
+        
+        saveCard.addTextField(configurationHandler: {(textField: UITextField) in
+            textField.placeholder = scorecard.filename
+            textField.keyboardType = UIKeyboardType.alphabet })
+        
+        let btnSave = UIAlertAction(title: "Save", style: UIAlertActionStyle.default, handler: {(saveAction: UIAlertAction) in
+            var filename: String? = saveCard.textFields![0].text!
+            if (filename?.isEmpty)! {
+                filename = saveCard.textFields![0].placeholder
+            }
+            if (filename == nil) {
+                //empty filename
+                let emptyController = UIAlertController(title: "No file name", message: "Save cancelled", preferredStyle: UIAlertControllerStyle.alert)
+                let btnCancel = UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil)
+                
+                emptyController.addAction(btnCancel)
+                self.present(emptyController, animated: true, completion: nil)
+                
+                return
+            }
+            
+            if (listOfScores.contains(where: filename!)){
+                // overwrite existing survey
+                let overwriteController = UIAlertController(title: "Warning", message: "A file already exists with that name.", preferredStyle: UIAlertControllerStyle.alert)
+                
+                let btnOverwrite = UIAlertAction(title: "Overwrite", style: UIAlertActionStyle.default, handler: {(saveAction: UIAlertAction) in
+                    let filename: String = saveCard.textFields![0].text!
+                    self.saveCard(filename: filename) })
+                let btnCancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil)
+                
+                overwriteController.addAction(btnOverwrite)
+                overwriteController.addAction(btnCancel)
+                
+                self.present(overwriteController, animated: true, completion: nil)
+            } else {
+                self.saveSurvey(filename: filename!)
+            }
+        })
+        let btnCancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil)
+        
+        saveController.addAction(btnSave)
+        saveController.addAction(btnCancel)
+        present(saveController, animated: true, completion: nil)
+    }
     
-    
+    @IBAction func btnShare(_ sender: Any) {
+    }
     
     //----------------------------------------------- Edit Score -----------------------------------------------//
     

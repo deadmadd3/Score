@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C12F827C211404CB009CCD8B /* Scorecard.swift in Sources */ = {isa = PBXBuildFile; fileRef = C12F827B211404CB009CCD8B /* Scorecard.swift */; };
 		C171D2341FFC90750047EE57 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C171D2331FFC90750047EE57 /* AppDelegate.swift */; };
 		C171D2391FFC90750047EE57 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C171D2371FFC90750047EE57 /* Main.storyboard */; };
 		C171D23B1FFC90750047EE57 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C171D23A1FFC90750047EE57 /* Assets.xcassets */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C12F827B211404CB009CCD8B /* Scorecard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scorecard.swift; sourceTree = "<group>"; };
 		C171D2301FFC90740047EE57 /* Score.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Score.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C171D2331FFC90750047EE57 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C171D2381FFC90750047EE57 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -60,6 +62,7 @@
 				C171D2371FFC90750047EE57 /* Main.storyboard */,
 				C171D2451FFC91D40047EE57 /* MainTableViewController.swift */,
 				C171D2471FFD55C50047EE57 /* Player.swift */,
+				C12F827B211404CB009CCD8B /* Scorecard.swift */,
 				C171D23A1FFC90750047EE57 /* Assets.xcassets */,
 				C171D23C1FFC90750047EE57 /* LaunchScreen.storyboard */,
 				C171D23F1FFC90750047EE57 /* Info.plist */,
@@ -141,6 +144,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C12F827C211404CB009CCD8B /* Scorecard.swift in Sources */,
 				C171D2481FFD55C50047EE57 /* Player.swift in Sources */,
 				C171D2461FFC91D40047EE57 /* MainTableViewController.swift in Sources */,
 				C171D2341FFC90750047EE57 /* AppDelegate.swift in Sources */,

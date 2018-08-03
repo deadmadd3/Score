@@ -102,9 +102,17 @@
                         </connections>
                     </tableView>
                     <toolbarItems>
-                        <barButtonItem systemItem="save" id="ZDP-S6-Lbg"/>
+                        <barButtonItem systemItem="save" id="ZDP-S6-Lbg">
+                            <connections>
+                                <action selector="btnSave:" destination="Y76-I0-mXj" id="0My-Re-sxO"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="t91-EX-Nt2"/>
-                        <barButtonItem systemItem="action" id="Keq-Yc-kzH"/>
+                        <barButtonItem systemItem="action" id="Keq-Yc-kzH">
+                            <connections>
+                                <action selector="btnShare:" destination="Y76-I0-mXj" id="Qd7-yq-SDB"/>
+                            </connections>
+                        </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Score!" id="57q-Aa-Vgd">
                         <barButtonItem key="leftBarButtonItem" title="Reorder" id="aPr-vE-1JD">
