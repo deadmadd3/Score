@@ -25,7 +25,7 @@
 		C171D23D1FFC90750047EE57 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C171D23F1FFC90750047EE57 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C171D2451FFC91D40047EE57 /* MainTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainTableViewController.swift; path = ../MainTableViewController.swift; sourceTree = "<group>"; };
-		C171D2471FFD55C50047EE57 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Player.swift; path = ../Player.swift; sourceTree = "<group>"; };
+		C171D2471FFD55C50047EE57 /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,6 +39,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C12F827D21140A79009CCD8B /* Scorecard */ = {
+			isa = PBXGroup;
+			children = (
+				C12F827B211404CB009CCD8B /* Scorecard.swift */,
+				C171D2471FFD55C50047EE57 /* Player.swift */,
+			);
+			path = Scorecard;
+			sourceTree = "<group>";
+		};
 		C171D2271FFC90740047EE57 = {
 			isa = PBXGroup;
 			children = (
@@ -61,8 +70,7 @@
 				C171D2331FFC90750047EE57 /* AppDelegate.swift */,
 				C171D2371FFC90750047EE57 /* Main.storyboard */,
 				C171D2451FFC91D40047EE57 /* MainTableViewController.swift */,
-				C171D2471FFD55C50047EE57 /* Player.swift */,
-				C12F827B211404CB009CCD8B /* Scorecard.swift */,
+				C12F827D21140A79009CCD8B /* Scorecard */,
 				C171D23A1FFC90750047EE57 /* Assets.xcassets */,
 				C171D23C1FFC90750047EE57 /* LaunchScreen.storyboard */,
 				C171D23F1FFC90750047EE57 /* Info.plist */,

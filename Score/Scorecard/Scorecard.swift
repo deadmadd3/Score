@@ -9,6 +9,8 @@
 import Foundation
 
 class Scorecard {
+    
     var filename: String = ""
     var scorecard: [Player] = []
+    
 }

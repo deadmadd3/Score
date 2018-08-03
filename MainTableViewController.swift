@@ -59,7 +59,7 @@ class MainTableViewController: UITableViewController {
     //----------------------------------------------- ToolBar Functions -----------------------------------------------//
     
     @IBAction func btnSave(_ sender: Any) {
-        let listOfScores: [Player] = []
+        let listOfScores: [String] = [""]
         
         let app: AppDelegate = UIApplication.shared.delegate as! AppDelegate
         let scorecard = app.scorecard as! Scorecard
@@ -86,14 +86,14 @@ class MainTableViewController: UITableViewController {
                 
                 return
             }
-            
-            if (listOfScores.contains(where: filename!)){
+
+            if (listOfScores.contains(filename!)){
                 // overwrite existing survey
                 let overwriteController = UIAlertController(title: "Warning", message: "A file already exists with that name.", preferredStyle: UIAlertControllerStyle.alert)
                 
                 let btnOverwrite = UIAlertAction(title: "Overwrite", style: UIAlertActionStyle.default, handler: {(saveAction: UIAlertAction) in
                     let filename: String = saveCard.textFields![0].text!
-                    self.saveCard(filename: filename) })
+                    self.saveScores(filename: filename) })
                 let btnCancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil)
                 
                 overwriteController.addAction(btnOverwrite)
@@ -101,14 +101,14 @@ class MainTableViewController: UITableViewController {
                 
                 self.present(overwriteController, animated: true, completion: nil)
             } else {
-                self.saveSurvey(filename: filename!)
+                self.saveScores(filename: filename!)
             }
         })
         let btnCancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil)
         
-        saveController.addAction(btnSave)
-        saveController.addAction(btnCancel)
-        present(saveController, animated: true, completion: nil)
+        saveCard.addAction(btnSave)
+        saveCard.addAction(btnCancel)
+        present(saveCard, animated: true, completion: nil)
     }
     
     @IBAction func btnShare(_ sender: Any) {
@@ -236,7 +236,22 @@ class MainTableViewController: UITableViewController {
         score.text = "\(item.score)"
     }
     
-    
+    func saveScores (filename: String) {
+        let app: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+        app.scorecard?.filename = filename
+        //updateSurvey()
+        
+        let directoryURL = try? FileManager.default.url(
+            for: .documentDirectory,
+            in: .userDomainMask,
+            appropriateFor: nil,
+            create: false)
+        
+//        let surveyURL = URL(fileURLWithPath: app.survey.filename, relativeTo: directoryURL).appendingPathExtension("plist")
+//
+//        guard NSKeyedArchiver.archiveRootObject(app.survey, toFile: surveyURL.path)
+//            else {fatalError()}
+    }
     
     //----------------------------------------------- Application Life Cycle -----------------------------------------------//
     
