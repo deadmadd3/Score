@@ -14,6 +14,7 @@ class MainTableViewController: UITableViewController {
     //----------------------------------------------- Navigation Bar Functions -----------------------------------------------//
     
     var playerList: [Player] = []
+    var context: NSManagedObjectContext!
 
     // Add Player
     @IBAction func btnNewPlayer(_ sender: Any) {
@@ -58,61 +59,37 @@ class MainTableViewController: UITableViewController {
     
     //----------------------------------------------- ToolBar Functions -----------------------------------------------//
     
-    @IBAction func btnSave(_ sender: Any) {
-        let listOfScores: [String] = [""]
-        
-        let app: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-        let scorecard = app.scorecard as! Scorecard
-        
-        // Creating the save file alert
-        let saveCard = UIAlertController(title: "Save Scorecard", message: "Please enter the file name:", preferredStyle: UIAlertControllerStyle.alert)
-        
-        saveCard.addTextField(configurationHandler: {(textField: UITextField) in
-            textField.placeholder = scorecard.filename
-            textField.keyboardType = UIKeyboardType.alphabet })
-        
-        let btnSave = UIAlertAction(title: "Save", style: UIAlertActionStyle.default, handler: {(saveAction: UIAlertAction) in
-            var filename: String? = saveCard.textFields![0].text!
-            if (filename?.isEmpty)! {
-                filename = saveCard.textFields![0].placeholder
-            }
-            if (filename == nil) {
-                //empty filename
-                let emptyController = UIAlertController(title: "No file name", message: "Save cancelled", preferredStyle: UIAlertControllerStyle.alert)
-                let btnCancel = UIAlertAction(title: "OK", style: UIAlertActionStyle.cancel, handler: nil)
-                
-                emptyController.addAction(btnCancel)
-                self.present(emptyController, animated: true, completion: nil)
-                
-                return
-            }
 
-            if (listOfScores.contains(filename!)){
-                // overwrite existing survey
-                let overwriteController = UIAlertController(title: "Warning", message: "A file already exists with that name.", preferredStyle: UIAlertControllerStyle.alert)
-                
-                let btnOverwrite = UIAlertAction(title: "Overwrite", style: UIAlertActionStyle.default, handler: {(saveAction: UIAlertAction) in
-                    let filename: String = saveCard.textFields![0].text!
-                    self.saveScores(filename: filename) })
-                let btnCancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil)
-                
-                overwriteController.addAction(btnOverwrite)
-                overwriteController.addAction(btnCancel)
-                
-                self.present(overwriteController, animated: true, completion: nil)
-            } else {
-                self.saveScores(filename: filename!)
-            }
-        })
-        let btnCancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil)
-        
-        saveCard.addAction(btnSave)
-        saveCard.addAction(btnCancel)
-        present(saveCard, animated: true, completion: nil)
-    }
+    @IBOutlet weak var btnReset: UIBarButtonItem!
     
     @IBAction func btnShare(_ sender: Any) {
     }
+    
+    //------------------------------------------------------------- Data -------------------------------------------------------------//
+    
+    
+    func initCoreData()
+    {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        context = appDelegate.persistentContainer.viewContext
+    }
+    
+    func fetchData()
+    {
+        do {
+            playerList = try context.fetch(Player.fetchRequest())
+            self.tableView.isHidden = (playerList.count == 0) ? true : false
+            self.tableView.reloadData()
+            checkButtons()
+        } catch {
+            print("Fetching Failed")
+        }
+    }
+    
+    
+    
+    
+
     
     //----------------------------------------------- Edit Score -----------------------------------------------//
     
@@ -236,21 +213,10 @@ class MainTableViewController: UITableViewController {
         score.text = "\(item.score)"
     }
     
-    func saveScores (filename: String) {
-        let app: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-        app.scorecard?.filename = filename
-        //updateSurvey()
-        
-        let directoryURL = try? FileManager.default.url(
-            for: .documentDirectory,
-            in: .userDomainMask,
-            appropriateFor: nil,
-            create: false)
-        
-//        let surveyURL = URL(fileURLWithPath: app.survey.filename, relativeTo: directoryURL).appendingPathExtension("plist")
-//
-//        guard NSKeyedArchiver.archiveRootObject(app.survey, toFile: surveyURL.path)
-//            else {fatalError()}
+    func checkButtons() {
+        btnReorder.isEnabled = (self.playerList.count == 0) ? false : true
+        btnShare.isEnabled = (self.playerList.count == 0) ? false : true
+        btnReset.isEnabled = (self.playerList.count == 0) ? false : true
     }
     
     //----------------------------------------------- Application Life Cycle -----------------------------------------------//

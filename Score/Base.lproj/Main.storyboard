@@ -102,11 +102,7 @@
                         </connections>
                     </tableView>
                     <toolbarItems>
-                        <barButtonItem systemItem="save" id="ZDP-S6-Lbg">
-                            <connections>
-                                <action selector="btnSave:" destination="Y76-I0-mXj" id="0My-Re-sxO"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem title="New Game" id="ZDP-S6-Lbg"/>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="t91-EX-Nt2"/>
                         <barButtonItem systemItem="action" id="Keq-Yc-kzH">
                             <connections>
@@ -127,6 +123,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="btnReset" destination="ZDP-S6-Lbg" id="CGh-fQ-zj6"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gyh-7j-KGW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
