@@ -17,6 +17,9 @@ class MainTableViewController: UITableViewController {
     var context: NSManagedObjectContext!
 
     // Add Player
+    
+    @IBOutlet weak var btnNewPlayer: UIBarButtonItem!
+    
     @IBAction func btnNewPlayer(_ sender: Any) {
         let alertController = UIAlertController(title: "Add Player", message: nil, preferredStyle: .alert)
         let alertText = UIAlertAction(title: "Done", style: .default) { (alertAction) in
@@ -31,6 +34,9 @@ class MainTableViewController: UITableViewController {
         alertController.addAction(alertText)
         present(alertController, animated: true, completion: nil)
     }
+    
+    
+    @IBOutlet weak var btnReorder: UIBarButtonItem!
     
     @IBAction func btnReorder(_ sender: Any) {
         
@@ -62,8 +68,8 @@ class MainTableViewController: UITableViewController {
 
     @IBOutlet weak var btnReset: UIBarButtonItem!
     
-    @IBAction func btnShare(_ sender: Any) {
-    }
+    @IBOutlet weak var btnShare: UIBarButtonItem!
+    
     
     //------------------------------------------------------------- Data -------------------------------------------------------------//
     
@@ -155,6 +161,21 @@ class MainTableViewController: UITableViewController {
         return 1
     }
     
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        tableView.separatorColor = UIColor.init(red: 0.09, green: 0.51, blue: 0.57, alpha: 0)
+        return playerList.count
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "Players"
+    }
+    
+    override func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool
+    {
+        return false
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "player", for: indexPath)
@@ -165,14 +186,10 @@ class MainTableViewController: UITableViewController {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        tableView.separatorColor = UIColor.init(red: 0.09, green: 0.51, blue: 0.57, alpha: 0)
-        return playerList.count
-    }
     
     // Delete Player
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        
         if editingStyle == .delete {
             playerList.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
@@ -224,6 +241,9 @@ class MainTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        initCoreData()
+        fetchData()
     }
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {

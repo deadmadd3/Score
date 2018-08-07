@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Player: Codable {
+class Player {
     
     var name = " "
     var score = 0
