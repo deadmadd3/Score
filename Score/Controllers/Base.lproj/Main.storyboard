@@ -104,18 +104,27 @@
                     <toolbarItems>
                         <barButtonItem title="New Game" id="ZDP-S6-Lbg"/>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="t91-EX-Nt2"/>
-                        <barButtonItem systemItem="action" id="Keq-Yc-kzH"/>
+                        <barButtonItem systemItem="action" id="Keq-Yc-kzH">
+                            <connections>
+                                <action selector="btnShare:" destination="Y76-I0-mXj" id="TyV-ut-CAY"/>
+                            </connections>
+                        </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="Score!" id="57q-Aa-Vgd">
-                        <barButtonItem key="leftBarButtonItem" title="Reorder" id="aPr-vE-1JD"/>
-                        <barButtonItem key="rightBarButtonItem" title="Add Player" id="kwn-cK-8iq"/>
+                        <barButtonItem key="leftBarButtonItem" title="Reorder" id="aPr-vE-1JD">
+                            <connections>
+                                <action selector="btnReorder:" destination="Y76-I0-mXj" id="uGv-V1-gk1"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Add Player" id="kwn-cK-8iq">
+                            <connections>
+                                <action selector="btnNewPlayer:" destination="Y76-I0-mXj" id="ic8-Cg-a8G"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="btnNewPlayer" destination="kwn-cK-8iq" id="81L-cx-V8i"/>
-                        <outlet property="btnReorder" destination="aPr-vE-1JD" id="ZIH-MU-Wst"/>
                         <outlet property="btnReset" destination="ZDP-S6-Lbg" id="CGh-fQ-zj6"/>
-                        <outlet property="btnShare" destination="Keq-Yc-kzH" id="Ish-f9-8vM"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gyh-7j-KGW" userLabel="First Responder" sceneMemberID="firstResponder"/>

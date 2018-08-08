@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class MainTableViewController: UITableViewController {
 
@@ -17,8 +18,6 @@ class MainTableViewController: UITableViewController {
     var context: NSManagedObjectContext!
 
     // Add Player
-    
-    @IBOutlet weak var btnNewPlayer: UIBarButtonItem!
     
     @IBAction func btnNewPlayer(_ sender: Any) {
         let alertController = UIAlertController(title: "Add Player", message: nil, preferredStyle: .alert)
@@ -36,7 +35,6 @@ class MainTableViewController: UITableViewController {
     }
     
     
-    @IBOutlet weak var btnReorder: UIBarButtonItem!
     
     @IBAction func btnReorder(_ sender: Any) {
         
@@ -68,7 +66,20 @@ class MainTableViewController: UITableViewController {
 
     @IBOutlet weak var btnReset: UIBarButtonItem!
     
-    @IBOutlet weak var btnShare: UIBarButtonItem!
+    @IBAction func btnShare(_ sender: Any) {
+        var shareContent = "Players:\n"
+        
+        for player in players
+        {
+            shareContent += String(format: "%@ - %ld\n", player.name!, player.score)
+        }
+        
+        let activityViewController = UIActivityViewController(activityItems: [shareContent as NSString], applicationActivities: nil)
+        activityViewController.view.tintColor = UIColor(red:0.11, green:0.79, blue:1.00, alpha:1.0)
+        
+        present(activityViewController, animated: true, completion: {})
+    }
+    
     
     
     //------------------------------------------------------------- Data -------------------------------------------------------------//
@@ -84,9 +95,8 @@ class MainTableViewController: UITableViewController {
     {
         do {
             playerList = try context.fetch(Player.fetchRequest())
-            self.tableView.isHidden = (playerList.count == 0) ? true : false
             self.tableView.reloadData()
-            checkButtons()
+            //checkButtons()
         } catch {
             print("Fetching Failed")
         }
@@ -138,12 +148,15 @@ class MainTableViewController: UITableViewController {
     }
     
     func editScore(_ num: String, _ index: Int) {
-        
-        guard let addThis = Int(num) else {
+
+        guard let addThis = Int16(num) else {
             let addThis = 0
             return
         }
-        playerList[index].score = playerList[index].score + addThis
+        
+        let currentScore = playerList[index].score
+        
+        playerList[index].score = (currentScore + addThis)
         tableView.reloadData()
 
     }
@@ -167,12 +180,7 @@ class MainTableViewController: UITableViewController {
         return playerList.count
     }
     
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return "Players"
-    }
-    
-    override func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool
-    {
+    override func tableView(_ tableView: UITableView, shouldHighlightRowAt indexPath: IndexPath) -> Bool {
         return false
     }
     
@@ -191,8 +199,22 @@ class MainTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         
         if editingStyle == .delete {
+            context.delete(playerList[indexPath.row])
             playerList.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
+            
+        }
+        
+        // save deletion to core data
+        do
+        {
+            try self.context.save()
+            self.tableView.isHidden = (self.playerList.count == 0) ? true : false
+        }
+        catch
+        {
+            let nserror = error as NSError
+            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
         }
     }
     
@@ -203,7 +225,7 @@ class MainTableViewController: UITableViewController {
     
     func addPlayer(new_name: String) {
         let newRowIndex = playerList.count
-        let person = Player()
+        let person = Player(context: self.context)
         
         person.name = new_name
         person.score = 0
@@ -216,6 +238,19 @@ class MainTableViewController: UITableViewController {
         let indexPath = IndexPath(row: newRowIndex, section: 0)
         let indexpaths = [indexPath]
         tableView.insertRows(at: indexpaths, with: .automatic)
+        
+        // saving to core data
+        do
+        {
+            try self.context.save()
+            self.tableView.isHidden = (self.playerList.count == 0) ? true : false
+            //self.checkButtons()
+        }
+        catch
+        {
+            let nserror = error as NSError
+            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+        }
     }
     
     func configureText(for cell: UITableViewCell, with item: Player) {
@@ -231,9 +266,9 @@ class MainTableViewController: UITableViewController {
     }
     
     func checkButtons() {
-        btnReorder.isEnabled = (self.playerList.count == 0) ? false : true
-        btnShare.isEnabled = (self.playerList.count == 0) ? false : true
-        btnReset.isEnabled = (self.playerList.count == 0) ? false : true
+//        btnReorder.isEnabled = (self.playerList.count == 0) ? false : true
+//        btnShare.isEnabled = (self.playerList.count == 0) ? false : true
+//        btnReset.isEnabled = (self.playerList.count == 0) ? false : true
     }
     
     //----------------------------------------------- Application Life Cycle -----------------------------------------------//
