@@ -184,7 +184,7 @@ class MainTableViewController: UITableViewController {
         
         playerList[index].score = (currentScore + addThis)
         
-        // save to core data
+        //core data
         do {
             let indexPath = IndexPath.init(row: index, section: 0)
             try self.context.save()
