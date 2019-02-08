@@ -25,12 +25,14 @@ class MainTableViewController: UITableViewController {
             let nameTextField = alertController.textFields![0] as UITextField
             self.addPlayer(new_name: nameTextField.text!)
         }
-        
+        let alertCancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         alertController.addTextField{ (nameTextField) in
             nameTextField.autocapitalizationType = .words
             nameTextField.placeholder = "Enter Name"
         }
+        
         alertController.addAction(alertText)
+        alertController.addAction(alertCancel)
         present(alertController, animated: true, completion: nil)
     }
     
